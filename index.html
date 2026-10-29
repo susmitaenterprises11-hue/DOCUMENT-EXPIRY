@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ne">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1456b8">
+<title>कागजात म्याद व्यवस्थापन</title>
+<style>
+:root{--blue:#1456b8;--blue2:#0b6ff0;--ink:#15345c;--muted:#64748b;--bg:#f3f7fc;--line:#dbe6f3;--green:#078b59;--orange:#b96500;--red:#c62828}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Devanagari",sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(135deg,#104aa2,#0877e8);color:white;padding:22px 17px 18px;position:sticky;top:0;z-index:2;box-shadow:0 3px 12px #163c6920}
+h1{font-size:21px;margin:0;text-align:center;line-height:1.4}header p{text-align:center;margin:5px 0 0;font-size:12px;opacity:.9}
+main{max-width:780px;margin:auto;padding:14px 12px 90px}.banner{background:#e2efff;border:1px solid #c9defb;border-radius:15px;padding:14px;margin-bottom:13px;display:flex;gap:12px;align-items:center}.banner .emoji{font-size:30px}.banner strong{display:block;font-size:15px}.banner small{display:block;color:#315b90;margin-top:3px}
+.card{background:white;border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px #173a6410}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{min-width:0}.field.full{grid-column:1/-1}label{display:block;font-size:13px;font-weight:700;margin:0 0 6px}input,select,textarea{width:100%;padding:12px 11px;border:1px solid #cbd9ea;border-radius:10px;font:inherit;font-size:14px;background:#fff;color:var(--ink);min-height:45px}input:focus,select:focus{outline:2px solid #a8ceff;border-color:var(--blue)}.hint{font-size:11px;color:var(--muted);margin-top:4px}.checkrow{display:flex;align-items:center;gap:8px;font-size:13px;margin-top:8px}.checkrow input{width:18px;min-height:18px}
+button{border:0;border-radius:11px;padding:12px 15px;font:inherit;font-weight:700;cursor:pointer}.primary{background:var(--blue2);color:#fff;width:100%;margin-top:14px}.secondary{background:#e8f1ff;color:#174f9c}.danger{background:#fff0f0;color:#b42323}.actions{display:flex;gap:8px;flex-wrap:wrap}.topline{display:flex;align-items:center;justify-content:space-between;gap:8px}.topline h2{margin:0}.search{margin:12px 0}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:13px}.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px;text-align:center}.stat b{display:block;font-size:21px}.stat span{font-size:11px;color:var(--muted)}.doc{border:1px solid var(--line);border-radius:13px;padding:13px;margin-top:9px;background:#fff}.dochead{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.docname{font-weight:800;font-size:15px}.docmeta{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.7}.badge{display:inline-block;border-radius:20px;padding:5px 9px;font-size:11px;font-weight:800;white-space:nowrap}.ok{background:#dcfce9;color:#087443}.soon{background:#fff0d9;color:#9a5100}.expired{background:#ffe3e3;color:#b42323}.empty{text-align:center;color:var(--muted);padding:24px 8px}.smallbtn{padding:7px 10px;font-size:12px}.footer{text-align:center;color:var(--muted);font-size:11px;padding:10px}.hidden{display:none!important}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.stats{gap:6px}.stat{padding:9px 4px}.stat b{font-size:18px}.card{padding:13px}.banner{padding:12px}}
+</style>
+</head>
+<body>
+<header><h1>कागजातको म्याद व्यवस्थापन</h1><p>Document Expiry Manager · नेपाली मिति (वि.सं.)</p></header>
+<main>
+<div class="banner"><div class="emoji">🗓️</div><div><strong>समयमै नवीकरण, सुरक्षित भविष्य</strong><small>कागजात थप्नुहोस् र म्याद सकिनुअघि सूचना जाँच गर्नुहोस्।</small></div></div>
+<section class="card">
+<h2 id="formTitle">＋ नयाँ कागजात थप्नुहोस्</h2>
+<form id="docForm">
+<input id="editId" type="hidden">
+<div class="grid">
+<div class="field"><label for="name">कागजातको नाम *</label><select id="name" required><option value="">छान्नुहोस्...</option><option>नागरिकता</option><option>सवारी चालक अनुमतिपत्र</option><option>पासपोर्ट</option><option>सवारी दर्ता किताब</option><option>बीमा पोलिसी</option><option>व्यवसाय दर्ता</option><option>PAN/VAT दर्ता</option><option>सम्झौता पत्र</option><option>अन्य कागजात</option></select></div>
+<div class="field"><label for="number">कागजात नम्बर *</label><input id="number" required placeholder="उदाहरण: AA123456"></div>
+<div class="field"><label for="issue">जारी भएको मिति (वि.सं.)</label><input id="issue" placeholder="२०८२-०५-१२" inputmode="numeric"></div>
+<div class="field"><label for="expiry">म्याद समाप्त हुने मिति (वि.सं.) *</label><input id="expiry" required placeholder="२०८३-१२-३०" inputmode="numeric"><div class="hint">मिति YYYY-MM-DD ढाँचामा लेख्नुहोस्।</div></div>
+<div class="field"><label for="office">जारी गर्ने कार्यालय</label><input id="office" placeholder="कार्यालयको नाम"></div>
+<div class="field"><label for="renewal">नवीकरण भएको मिति (वि.सं.)</label><input id="renewal" placeholder="२०८३-०१-०१" inputmode="numeric"></div>
+<div class="field"><label for="current">आजको मिति (वि.सं.)</label><input id="current" value="2083-07-12" required inputmode="numeric"><div class="hint">म्यादको अवस्था ठीक राख्न आवश्यक परे अद्यावधिक गर्नुहोस्।</div></div>
+<div class="field"><label for="status">कागजातको अवस्था</label><select id="status"><option value="auto">म्यादअनुसार स्वतः</option><option value="चालु">चालु</option><option value="नवीकरण भएको">नवीकरण भएको</option></select></div>
+</div>
+<label class="checkrow"><input id="remind" type="checkbox" checked> म्याद सकिनुअघि सूचना देखाउनुहोस्</label>
+<button class="primary" type="submit" id="saveBtn">▣ सेभ गर्नुहोस्</button>
+<div class="actions" style="margin-top:8px"><button type="button" class="secondary hidden" id="cancelEdit">रद्द गर्नुहोस्</button><button type="button" class="secondary" id="exportBtn">डेटा निर्यात गर्नुहोस्</button><button type="button" class="secondary" id="importBtn">डेटा आयात गर्नुहोस्</button><input type="file" id="importFile" accept="application/json" class="hidden"></div>
+</form>
+</section>
+<div class="stats"><div class="stat"><b id="total">0</b><span>जम्मा कागजात</span></div><div class="stat"><b id="soonCount">0</b><span>म्याद सकिन बाँकी</span></div><div class="stat"><b id="expiredCount">0</b><span>म्याद सकिएका</span></div></div>
+<section class="card">
+<div class="topline"><h2>▤ मेरा कागजातहरू</h2><button class="secondary smallbtn" id="notifyBtn">🔔 सूचना</button></div>
+<input class="search" id="search" placeholder="कागजातको नाम वा नम्बर खोज्नुहोस्...">
+<div id="notice"></div><div id="list"></div>
+</section>
+<div class="footer">तपाईंको डाटा यही डिभाइसको ब्राउजरमा सुरक्षित हुन्छ। ब्राउजर डाटा मेटाउँदा डाटा हराउन सक्छ, त्यसैले समय-समयमा निर्यात गर्नुहोस्।</div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const STORE='documentExpiryManager_ne_v1';
+let docs=JSON.parse(localStorage.getItem(STORE)||'[]');
+const norm=s=>String(s||'').trim().replace(/[०-९]/g,d=>'०१२३४५६७८९'.indexOf(d)).replace(/[/.]/g,'-');
+function tuple(s){const a=norm(s).split('-').map(Number);return a.length===3&&a.every(Number.isFinite)?a:null}
+function compare(a,b){let x=tuple(a),y=tuple(b);if(!x||!y)return null;for(let i=0;i<3;i++){if(x[i]<y[i])return -1;if(x[i]>y[i])return 1}return 0}
+function dayGap(a,b){let x=tuple(a),y=tuple(b);if(!x||!y)return null;const rough=v=>v[0]*365+Math.floor((v[0]-1)/4)+v[1]*30+v[2];return rough(x)-rough(y)}
+function status(d){if(d.manual==='नवीकरण भएको')return {label:'नवीकरण भएको',cls:'ok'};if(d.manual==='चालु')return {label:'चालु',cls:'ok'};let c=compare(d.expiry,d.current);if(c===null)return {label:'मिति जाँच्नुहोस्',cls:'soon'};if(c<0)return {label:'म्याद सकिएको',cls:'expired'};let gap=dayGap(d.expiry,d.current);if(gap!==null&&gap<=30)return {label:`म्याद सकिन बाँकी (${Math.max(0,gap)} दिन)`,cls:'soon'};return {label:'चालु',cls:'ok'}}
+function save(){localStorage.setItem(STORE,JSON.stringify(docs));render()}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function render(){let q=$('search').value.toLowerCase().trim(),arr=docs.filter(d=>(d.name+' '+d.number+' '+d.office).toLowerCase().includes(q));$('total').textContent=docs.length;$('soonCount').textContent=docs.filter(d=>status(d).cls==='soon').length;$('expiredCount').textContent=docs.filter(d=>status(d).cls==='expired').length;
+let reminders=docs.filter(d=>d.remind&&status(d).cls!=='ok');$('notice').innerHTML=reminders.length?`<div class="banner"><div class="emoji">🔔</div><div><strong>${reminders.length} वटा कागजातमा ध्यान दिनुहोस्</strong><small>म्याद सकिएको वा ३० दिनभित्र सकिन सक्ने कागजात छन्।</small></div></div>`:'';
+$('list').innerHTML=arr.length?arr.map(d=>{let s=status(d);return `<article class="doc"><div class="dochead"><div><div class="docname">${esc(d.name)}</div><div class="docmeta">नम्बर: ${esc(d.number)}<br>म्याद समाप्त: वि.सं. ${esc(d.expiry)}<br>${d.office?'कार्यालय: '+esc(d.office)+'<br>':''}${d.issue?'जारी मिति: वि.सं. '+esc(d.issue):''}</div></div><span class="badge ${s.cls}">${esc(s.label)}</span></div><div class="actions" style="margin-top:10px"><button class="secondary smallbtn" onclick="editDoc('${d.id}')">सम्पादन</button><button class="danger smallbtn" onclick="deleteDoc('${d.id}')">मेटाउनुहोस्</button></div></article>`}).join(''):'<div class="empty">कुनै कागजात छैन। माथिको फारामबाट नयाँ कागजात थप्नुहोस्।</div>'}
+$('docForm').addEventListener('submit',e=>{e.preventDefault();let id=$('editId').value||String(Date.now());let old=docs.find(d=>d.id===id);let d={id,name:$('name').value,number:$('number').value.trim(),issue:$('issue').value.trim(),expiry:$('expiry').value.trim(),office:$('office').value.trim(),renewal:$('renewal').value.trim(),current:$('current').value.trim(),manual:$('status').value==='auto'?'auto':$('status').value,remind:$('remind').checked};if(!tuple(d.expiry)){alert('म्याद समाप्त हुने मिति YYYY-MM-DD ढाँचामा लेख्नुहोस्।');return}if(!tuple(d.current)){alert('आजको नेपाली मिति YYYY-MM-DD ढाँचामा लेख्नुहोस्।');return}if(old)docs=docs.map(x=>x.id===id?d:x);else docs.unshift(d);save();resetForm();});
+function resetForm(){$('docForm').reset();$('editId').value='';$('current').value='2083-07-12';$('formTitle').textContent='＋ नयाँ कागजात थप्नुहोस्';$('saveBtn').textContent='▣ सेभ गर्नुहोस्';$('cancelEdit').classList.add('hidden')}
+window.editDoc=id=>{let d=docs.find(x=>x.id===id);if(!d)return;for(let k of ['name','number','issue','expiry','office','renewal','current'])$(k).value=d[k]||'';$('status').value=d.manual||'auto';$('remind').checked=d.remind;$('editId').value=d.id;$('formTitle').textContent='कागजात सम्पादन गर्नुहोस्';$('saveBtn').textContent='परिवर्तन सेभ गर्नुहोस्';$('cancelEdit').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})}
+window.deleteDoc=id=>{if(confirm('यो कागजात मेटाउने हो?')){docs=docs.filter(d=>d.id!==id);save()}}
+$('cancelEdit').onclick=resetForm;$('search').addEventListener('input',render);
+$('exportBtn').onclick=()=>{let blob=new Blob([JSON.stringify(docs,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mero-kagajat-backup.json';a.click();URL.revokeObjectURL(a.href)}
+$('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let data=JSON.parse(await f.text());if(!Array.isArray(data))throw Error();if(confirm('हालको सूचीसँग आयात गरिएका कागजात थप्ने?'))docs=[...data,...docs];else docs=data;save();alert('डाटा आयात भयो।')}catch{alert('यो JSON ब्याकअप फाइल मान्य छैन।')}e.target.value=''}
+$('notifyBtn').onclick=async()=>{let items=docs.filter(d=>d.remind&&status(d).cls!=='ok');alert(items.length?items.map(d=>d.name+' ('+d.number+'): '+status(d).label).join('\\n'):'अहिले ध्यान दिनुपर्ने कागजात छैन।');if('Notification'in window&&Notification.permission==='default'){try{await Notification.requestPermission()}catch{}}}
+render();
+</script>
+</body>
+</html>
